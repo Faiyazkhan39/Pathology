@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title> Pathology | About Us </title>
+
+  <!-- Web Fonts -->
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin">
+
+  <!-- CSS Global Compulsory -->
+  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- CSS Header and Footer -->
+  <link rel="stylesheet" href="assets/css/header.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+
+  <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="assets/plugins/line-icons-pro/styles.css">
+  <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
+  <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
+
+  <!-- CSS Customization -->
+  <link rel="stylesheet" href="assets/css/custom.css">
+  <style>
+    #appointmentDetails {
+    margin-top: 20px;
+}
+
+#appointmentDetails h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+#appointmentDetails table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#appointmentDetails th,
+#appointmentDetails td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+#appointmentDetails th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+#appointmentDetails tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#appointmentDetails tbody tr:hover {
+    background-color: #ddd;
+}
+
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <!--=== Header v1 ===-->
+  <div class="header-v1">
+    <!-- Topbar -->
+    <div class="topbar-v1">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="list-inline top-v1-contacts">
+              <li>
+                <i class="fa fa-envelope"></i> Email: pathology@gmail.com
+              </li>
+              <li>
+                <i class="fa fa-phone"></i> Contact no : 88666 00555
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End Topbar -->
+
+    <!-- Navbar -->
+    <div class="navbar mega-menu" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="res-container">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <div class="navbar-brand">
+            <!--				<a href="index.html">-->
+            <!--				<img src="assets/img/logo/unity_white.jpg" alt="Logo"/>-->
+            <!--				</a>-->
+            <a th:href="@{/index}" >
+              <img src="assets/img/logo/unity_white.jpg" alt="Logo"/>
+            </a>
+          </div>
+        </div><!--/end responsive container-->
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-responsive-collapse">
+          <div class="res-container">
+            <ul class="nav navbar-nav">
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+
+
+              <!-- Home  -->
+              <li class="mega-menu-fullwidth">
+                <a th:href="@{/index}" >
+                  HOME
+                </a>
+
+
+              </li>
+              <!-- End Home-->
+
+              <!-- About Us -->
+              <li class="mega-menu-fullwidth">
+                <a th:href="@{/about}" >
+                  ABOUT US
+                </a>
+              </li>
+              <!-- End About us -->
+
+              <!-- Doctors -->
+              <li class="mega-menu-fullwidth">
+                <a th:href="@{/doctors}" >
+                  DOCTORS
+                </a>
+
+              </li>
+              <!-- End Doctors -->
+
+
+              <!-- Gallery -->
+              <li class="mega-menu-fullwidth">
+                <a th:href="@{/gallery}" >
+                  GALLERY
+                </a>
+
+              </li>
+              <!-- End Gallery -->
+
+
+              <!-- Blog -->
+              <li class="mega-menu-fullwidth">
+                <a th:href="@{/blog}" >
+                  BLOGS
+                </a>
+              </li>
+              <!-- End Blog -->
+
+              <!-- Contact Us -->
+              <li class="mega-menu-fullwidth">
+                <a th:href="@{/contact}" >
+                  CONTACT US
+                </a>
+              </li>
+              <!-- End Contact us -->
+
+              <!-- Registration -->
+              <li class="mega-menu-fullwidth" th:if="${session['username'] == null}">
+                <a th:href="@{/registration}" >
+                  REGISTRATION
+                </a>
+              </li>
+              <!-- End registration -->
+
+              <!-- login -->
+              <li class="mega-menu-fullwidth" th:if="${session['username'] == null}">
+                <a th:href="@{/login}">
+                  LOGIN
+                </a>
+              </li>
+              <li class="mega-menu-fullwidth" th:if="${session['username'] != null}">
+                <a th:href="@{/logout}">
+                  LOGOUT
+                </a>
+                <span>Welcome, <span th:text="${session['username']}"></span></span>
+              </li>
+              <li class="mega-menu-fullwidth" th:if="${session['username'] != null}">
+                <a th:href="@{/dashboard}">
+                  DASHBOARD
+                </a>
+              </li>
+              <!-- End login -->
+
+              <!-- Appointment -->
+              <li class="mega-menu-fullwidth">
+                <a th:href="@{/appointment}" >
+                  BOOK APPOINTMENT
+                </a>
+
+              </li>
+              <!-- End Appointment -->
+
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Navbar -->
+
+  <div id="appointmentDetails" th:if="${session['username'] != null}">
+    <h2>Appointment Details</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Purpose</th>
+          <th>Department</th>
+          <th>Date</th>
+          <th>Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Here you can iterate over the appointment details and populate the table rows -->
+        <!-- Example: -->
+
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.name}"></td>
+            <td th:text="${appointment.email}"></td>
+            <td th:text="${appointment.purpose}"></td>
+            <td th:text="${appointment.department}"></td>
+            <td th:text="${appointment.appointmentDate}"></td>
+            <td th:text="${appointment.appointmentTime}"></td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(appointments)}">
+          <td colspan="6">No appointment records found.</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!--=== Footer ===-->
+  <div class="footer-v1">
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- About -->
+          <div class="col-md-3" style="margin-bottom: 40px;">
+            <!--		<a href="index.html"><img id="logo-footer" class="footer-logo" src="assets/img/logo/unity_white.jpg" alt=""/></a>-->
+            <a th:href="@{/index}" ><img id="logo-footer" class="footer-logo" src="assets/img/logo/unity_white.jpg" alt=""/></a>
+            <p>At Pathology, we are convinced that 'quality' and 'lowest cost' are not mutually exclusive when it comes to healthcare delivery.</p>
+            <p>Our mission is to deliver high quality, affordable healthcare services to the broader population in India.</p>
+          </div><!--/col-md-3-->
+          <!-- End About -->
+
+          <!-- Latest -->
+          <div class="col-md-3" style="margin-bottom: 40px;">
+            <div class="posts">
+              <div class="headline"><h2>Latest Posts</h2></div>
+              <ul class="list-unstyled latest-list">
+                <li>
+                  <!--		<a href="blog.html">Incredible content</a>-->
+                  <!--			-->
+                  <a th:href="@{/blog}">Incredible content</a>
+
+                  <small>December 16, 2020</small>
+                </li>
+                <li>
+                  <!--		<a href="gallery.html">Latest Images</a>-->
+                  <!--			-->
+                  <a th:href="@{/gallery}" >Latest Images</a>
+
+                  <small>December 16, 2020</small>
+                </li>
+                <li>
+                  <a th:href="@{/terms}" >Terms and Conditions</a>
+                  <small>December 16, 2020</small>
+                </li>
+              </ul>
+            </div>
+          </div><!--/col-md-3-->
+          <!-- End Latest -->
+
+          <!-- Link List -->
+          <div class="col-md-3" style="margin-bottom: 40px;">
+            <div class="headline"><h2>Useful Links</h2></div>
+            <ul class="list-unstyled link-list">
+              <li><a th:href="@{/about}" >About us</a>
+                <i class="fa fa-angle-right"></i></li>
+              <li>
+                <a th:href="@{/contact}" >Contact us</a>
+                <i class="fa fa-angle-right"></i></li>
+              <li>
+                <a th:href="@{/appointment}" >Book Appointment</a>
+                <i class="fa fa-angle-right"></i></li>
+            </ul>
+          </div><!--/col-md-3-->
+          <!-- End Link List -->
+
+          <!-- Address -->
+          <div class="col-md-3 map-img" style="margin-bottom: 40px;">
+            <div class="headline"><h2>Contact Us</h2></div>
+            <address class="md-margin-bottom-40">
+               Pathology <br />
+              Ahmedabad, IN <br />
+              Phone: 886 666 00555 <br />
+              Email: pathology@gmail.com
+            </address>
+          </div><!--/col-md-3-->
+          <!-- End Address -->
+        </div>
+      </div>
+    </div><!--/footer-->
+
+    <div class="copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <p>
+              2024 &copy; All Rights Reserved.
+              <a th:href="@{/privacy}" >Privacy Policy</a>|<a th:href="@{/terms}" >Terms of Service</a>
+
+            </p>
+          </div>
+
+          <!-- Social Links -->
+          <div class="col-md-6">
+            <ul class="footer-socials list-inline">
+              <li>
+                <a href="http://www.facebook.com" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
+                  <i class="fa fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a href="http://www.skype.com" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype">
+                  <i class="fa fa-skype"></i>
+                </a>
+              </li>
+              <li>
+                <a href="http://www.googleplus.com" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google Plus">
+                  <i class="fa fa-google-plus"></i>
+                </a>
+              </li>
+              <li>
+                <a href="http://www.linkedin.com" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Linkedin">
+                  <i class="fa fa-linkedin"></i>
+                </a>
+              </li>
+              <li>
+                <a href="http://www.Pinterest.com" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest">
+                  <i class="fa fa-pinterest"></i>
+                </a>
+              </li>
+              <li>
+                <a href="http://www.twitter.com" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter">
+                  <i class="fa fa-twitter"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- End Social Links -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
